@@ -43,13 +43,15 @@ public class AgendaDeConsultaService {
 
     public void agendar(DatosAgendarConsulta datos){
 
-        if(pacienteRepository.findById(datos.idPaciente()).isEmpty()){
+        if(!pacienteRepository.findById(datos.idPaciente()).isPresent()){
             throw new ValidacionDeIntegridad("este id para el paciente no fue encontrado");
         }
 
-        if(datos.idMedico()!=null && medicoRepository.existsById(datos.idMedico())){
+        if(datos.idMedico()!=null && !medicoRepository.existsById(datos.idMedico())){
             throw new ValidacionDeIntegridad("este id para el medico no fue encontrado");
         }
+
+        // Validaciones
 
         var paciente = pacienteRepository.findById(datos.idPaciente()).get();
 
