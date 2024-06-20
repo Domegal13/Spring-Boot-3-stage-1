@@ -4,7 +4,7 @@ import jakarta.validation.ValidationException;
 import med.voll.api.domain.consulta.DatosAgendarConsulta;
 import med.voll.api.domain.medico.MedicoRepository;
 
-public class MedicoAvtivo {
+public class MedicoActivo {
 
     private MedicoRepository medicoRepository;
     public void validar(DatosAgendarConsulta datosAgendarConsulta){
@@ -16,7 +16,7 @@ public class MedicoAvtivo {
         var medicoActivo = medicoRepository.findActivoById(datosAgendarConsulta.idMedico());
 
         if (!medicoActivo){
-            throw new Validat   ionException("No se puede agendar citas con médicos inactivos en el sistema");
+            throw new ValidationException("No se puede agendar citas con médicos inactivos en el sistema");
         }
 
     }
