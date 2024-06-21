@@ -1,11 +1,14 @@
 package med.voll.api.domain.consulta;
 
+import med.voll.api.domain.consulta.validaciones.ValidadorDeConsultas;
 import med.voll.api.domain.medico.Medico;
 import med.voll.api.domain.medico.MedicoRepository;
 import med.voll.api.domain.paciente.PacienteRepository;
 import med.voll.api.infra.errores.ValidacionDeIntegridad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AgendaDeConsultaService {
@@ -17,7 +20,7 @@ public class AgendaDeConsultaService {
     @Autowired
     private ConsultaRepository consultaRepository;
 
-
+    List<ValidadorDeConsultas> validadorDeConsultas;
 
 //    public void agendar(DatosAgendarConsulta datos) {
 //        // Verificar si el paciente existe
@@ -52,6 +55,7 @@ public class AgendaDeConsultaService {
         }
 
         // Validaciones
+        validadorDeConsultas.forEach(v -> v.validar(datos));
 
         var paciente = pacienteRepository.findById(datos.idPaciente()).get();
 
