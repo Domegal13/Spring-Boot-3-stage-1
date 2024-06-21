@@ -8,10 +8,11 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+@Component
 public class PacienteSinConsulta implements ValidadorDeConsultas {
-    @Component
-    private ConsultaRepository consultaRepository;
     @Autowired
+    private ConsultaRepository consultaRepository;
+
     public void validar(DatosAgendarConsulta datosAgendarConsulta){
 
         var primerHorario = datosAgendarConsulta.fecha().withHour(7);
